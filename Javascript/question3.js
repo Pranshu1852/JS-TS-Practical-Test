@@ -27,13 +27,18 @@ const obj2 = {
 };
 
 
+function checkObject(obj1,obj2){
+    return (typeof obj1==='object'&&typeof obj2==='object')&&(!Array.isArray(obj1)&&!Array.isArray(obj2));
+}
+
+
 function deepMerge(obj1,obj2,obj3={}){
     for(let pair of Object.entries(obj1)){
         let key=pair[0];
         let val=pair[1];
         if(obj2[key]){
             
-            if((typeof obj1[key]==='object'&&typeof obj2[key]==='object')&&(!Array.isArray(obj1[key])&&!Array.isArray(obj2[key]))){
+            if(checkObject(obj1[key],obj2[key])){
                 obj3[key]=deepMerge(obj1[key],obj2[key],{});
             }
             else{
