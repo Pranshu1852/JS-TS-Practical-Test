@@ -4,34 +4,31 @@ const input = [1, [2, [3, [4, [5]]]]];
 
 // output: [1, 2, 3, [4, [5]]]
 
+function flatDepth(arr, depth = 1) {
+  if (depth <= 0) {
+    return arr;
+  }
 
-function flatDepth(arr,depth=1){
-    if(depth<=0){
-        return arr;
-    }
-    
-    let output=[];
+  let output = [];
 
-    function flat(arr,depth){
-        if(depth<0){
-            output.push(arr);
-            return;
-        }
-
-        for(let val of arr){
-            if(Array.isArray(val)){
-                flat(val,depth-1,output);
-            }
-            else{
-                output.push(val);
-            }
-        }
+  function flat(arr, depth) {
+    if (depth < 0) {
+      output.push(arr);
+      return;
     }
 
-    flat(arr,depth);
+    for (let val of arr) {
+      if (Array.isArray(val)) {
+        flat(val, depth - 1, output);
+      } else {
+        output.push(val);
+      }
+    }
+  }
 
-    return output;
+  flat(arr, depth);
+
+  return output;
 }
 
-
-console.log(JSON.stringify(flatDepth(input,0)));
+console.log(JSON.stringify(flatDepth(input, 0)));
